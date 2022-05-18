@@ -12826,17 +12826,45 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (guessedWords.length === 6 && guessedWord !== currentWord) {
                 setTimeout(() => {
-                    const okSelected = window.confirm(
-                        `Sorry, you have no more guesses! The word is "${currentWord.toUpperCase()}".`
-                    );
-                    if (okSelected) {
-                        clearBoard();
-                        showLosingResult();
-                        updateWordIndex();
-                        updateTotalGames();
-                        resetGameState();
-                    }
+                    swal({
+                        title: "Alas",
+                        text: `Sorry, you have no more guesses! The word is "${currentWord.toUpperCase()}".`,
+                        imageUrl: 'assets/img/sad.png',
+                        imageWidth: 200,
+                        imageHeight: 200,
+                        imageAlt: 'Custom image',
+                        animation: false,
+                        confirmButtonText: "Play Again",
+                        showCancelButton: true
+                    }).then((result) => {
+                        if (result.value) {
+                            clearBoard();
+                            showResult();
+                            updateWordIndex();
+                            updateTotalGames();
+                            resetGameState();
+                            var info = $(".info-msg");
+                            var infoIndex = -1;
+
+                            ++infoIndex;
+                            info.eq(infoIndex % info.length)
+                                .fadeIn(3000)
+                                .delay(2000)
+                                .fadeOut(2000);
+
+                            setTimeout(function() {
+                                window.location.reload(1);
+                            }, 5000);
+                        } else if (result.dismiss === 'cancel') {
+                            swal(
+                                'Cancelled',
+                                'Your stay here :)',
+                                'error'
+                            )
+                        }
+                    })
                     return;
+
                 }, 1200);
             }
 
