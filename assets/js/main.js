@@ -13235,7 +13235,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     swal({
                         title: "Congratulations",
                         text: "You Win",
-                        imageUrl: 'balloons.png',
+                        imageUrl: 'assets/img/balloons.png',
                         imageWidth: 200,
                         imageHeight: 200,
                         imageAlt: 'Custom image',
